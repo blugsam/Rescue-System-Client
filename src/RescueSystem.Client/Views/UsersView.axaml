@@ -1,0 +1,52 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:RescueSystem.Client.ViewModels"
+             x:Class="RescueSystem.Client.Views.UsersView"
+             x:DataType="vm:UsersViewModel">
+
+	<Grid ColumnDefinitions="300, *">
+
+		<DockPanel Grid.Column="0" Margin="0,0,10,0">
+			<TextBlock Text="Пользователи" FontSize="18" FontWeight="Bold" DockPanel.Dock="Top" Margin="0,0,0,10"/>
+			<StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="5" Spacing="5">
+				<Button Content="+" ToolTip.Tip="Добавить пользователя" Command="{Binding AddNewUserCommand}"/>
+				<Button Content="-" ToolTip.Tip="Удалить пользователя" Command="{Binding DeleteUserCommand}"/>
+			</StackPanel>
+
+			<ListBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUserInList, Mode=TwoWay}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding FullName}"/>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</DockPanel>
+
+		<Grid Grid.Column="1">
+
+			<StackPanel Spacing="10" IsVisible="{Binding SelectedUserDetails, Converter={StaticResource IsNotNullConverter}}">
+				<TextBlock Text="{Binding SelectedUserDetails.FullName}" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+				<Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto" RowSpacing="10">
+					<TextBlock Grid.Row="0" Grid.Column="0" Text="ФИО:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+					<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedUserDetails.FullName, Mode=TwoWay}"/>
+
+					<TextBlock Grid.Row="1" Grid.Column="0" Text="Дата рождения:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+					<DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding SelectedUserDetails.DateOfBirth, Mode=TwoWay, Converter={StaticResource DateConverter}}"/>
+
+					<TextBlock Grid.Row="2" Grid.Column="0" Text="Мед. заметки:" VerticalAlignment="Top" Margin="0,5,10,0"/>
+					<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedUserDetails.MedicalNotes, Mode=TwoWay}" Height="100" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+					<TextBlock Grid.Row="3" Grid.Column="0" Text="Экстренный контакт:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+					<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedUserDetails.EmergencyContact, Mode=TwoWay}"/>
+				</Grid>
+
+				<Button Content="Сохранить изменения" HorizontalAlignment="Left" Margin="0,20,0,0" Command="{Binding SaveUserCommand}"/>
+			</StackPanel>
+
+			<TextBlock Text="Выберите пользователя из списка или добавьте нового"
+                       IsVisible="{Binding SelectedUserDetails, Converter={StaticResource IsNullConverter}}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray"/>
+		</Grid>
+	</Grid>
+</UserControl>

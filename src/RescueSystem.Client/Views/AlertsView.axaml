@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:RescueSystem.Client.ViewModels"
+             x:Class="RescueSystem.Client.Views.AlertsView"
+             x:DataType="vm:AlertsViewModel">
+
+	<Grid RowDefinitions="Auto, *" Margin="10">
+
+		<StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="20" Margin="0,0,10,10">
+			<TextBlock Text="Оперативная сводка" FontSize="18" FontWeight="Bold" DockPanel.Dock="Top" Margin="0,0,0,10"/>
+			<Button Content="Обновить" Command="{Binding LoadAlertsCommand}" VerticalAlignment="Center"/>
+		</StackPanel>
+
+		<ProgressBar Grid.Row="1"
+                     IsIndeterminate="True"
+                     IsVisible="{Binding IsLoading}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     MaxWidth="400"/>
+
+		<DataGrid Grid.Row="1"
+                  ItemsSource="{Binding Alerts}"
+                  IsVisible="{Binding !IsLoading}"
+                  IsReadOnly="True"
+                  CanUserSortColumns="True"
+                  GridLinesVisibility="All">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="Auto"/>
+				<DataGridTextColumn Header="Качество" Binding="{Binding QualityLevel}" Width="Auto"/>
+				<DataGridTextColumn Header="Пользователь" Binding="{Binding UserFullName}" Width="*"/>
+				<DataGridTextColumn Header="Серийный номер" Binding="{Binding BraceletSerialNumber}" Width="*"/>
+				<DataGridTextColumn Header="Время" Binding="{Binding Timestamp, StringFormat='dd.MM.yyyy HH:mm:ss'}" Width="*"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+	</Grid>
+</UserControl>

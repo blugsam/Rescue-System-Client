@@ -1,0 +1,25 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:RescueSystem.Client.ViewModels"
+             x:Class="RescueSystem.Client.Views.ConfigurationView"
+             x:DataType="vm:ConfigurationViewModel">
+	<StackPanel Spacing="15" Margin="20">
+		<TextBlock Text="Конфигурация" FontSize="20" FontWeight="Bold"/>
+
+		<Border Padding="15" BorderThickness="1" BorderBrush="LightGray" CornerRadius="3">
+			<StackPanel Spacing="10">
+				<TextBlock Text="Адрес сервера API"/>
+				<TextBox Text="{Binding ServerUrl, Mode=TwoWay}" Watermark="https://localhost:7043"/>
+
+				<CheckBox IsChecked="{Binding SavePassword, Mode=TwoWay}"
+                          Content="Сохранять пароль (небезопасно)"/>
+			</StackPanel>
+		</Border>
+
+		<StackPanel Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
+			<Button Content="Сохранить" Command="{Binding SaveSettingsCommand}"/>
+			<TextBlock Text="{Binding StatusMessage}" Foreground="Green" VerticalAlignment="Center"/>
+		</StackPanel>
+
+	</StackPanel>
+</UserControl>

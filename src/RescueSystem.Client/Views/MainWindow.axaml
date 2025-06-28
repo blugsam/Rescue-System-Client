@@ -1,0 +1,71 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:RescueSystem.Client.ViewModels"
+        x:Class="RescueSystem.Client.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Rescue System Operator Panel"
+        Width="1024" Height="768"
+        WindowStartupLocation="CenterScreen">
+
+	<Window.Styles>
+		<Style Selector="Button.nav-button">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Foreground" Value="#D3D3D3"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="Padding" Value="20,12"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0.15"/>
+					<BrushTransition Property="Foreground" Duration="0.15"/>
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<Style Selector="Button.nav-button:pointerover">
+			<Setter Property="Background" Value="#406060"/>
+		</Style>
+
+		<Style Selector="Button.nav-button.active">
+			<Setter Property="Background" Value="#4F7A7A"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+		</Style>
+	</Window.Styles>
+
+	<Grid ColumnDefinitions="250, *">
+
+		<Border Grid.Column="0" Background="#2F4F4F" Padding="5">
+			<StackPanel Spacing="5">
+
+				<Button Content="Оперативная сводка"
+                        Command="{Binding NavigateToAlertsCommand}"
+                        Classes="nav-button"
+                        Classes.active="{Binding IsAlertsPageActive}"/>
+
+				<Button Content="Пользователи"
+                        Command="{Binding NavigateToUsersCommand}"
+                        Classes="nav-button"
+                        Classes.active="{Binding IsUsersPageActive}"/>
+
+				<Button Content="Браслеты"
+                        Command="{Binding NavigateToBraceletsCommand}"
+                        Classes="nav-button"
+                        Classes.active="{Binding IsBraceletsPageActive}"/>
+
+				<Separator Margin="10,15" Background="#4F7A7A"/>
+
+				<Button Content="Конфигурация"
+						Command="{Binding NavigateToConfigurationCommand}"
+						Classes="nav-button"
+						Classes.active="{Binding IsConfigurationPageActive}"/>
+			</StackPanel>
+		</Border>
+
+		<ContentControl Grid.Column="1" Content="{Binding CurrentPage}" Margin="10"/>
+	</Grid>
+
+</Window>
