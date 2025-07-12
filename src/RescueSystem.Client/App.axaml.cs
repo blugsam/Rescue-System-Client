@@ -53,7 +53,17 @@ namespace RescueSystem.Client
             services.AddHttpClient<ApiClient>((serviceProvider, client) =>
             {
                 var settingsService = serviceProvider.GetRequiredService<SettingsService>();
-                client.BaseAddress = new Uri(settingsService.CurrentSettings.ServerUrl);
+                var serverUrl = settingsService.CurrentSettings.ServerUrl;
+
+                try
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                }
+                catch (UriFormatException)
+                {
+                    client.BaseAddress = new Uri("https://localhost:7043");
+                    Console.WriteLine($"Invalid ServerUrl, using fallback");
+                }
             });
             services.AddSingleton<SignalRService>(serviceProvider =>
             {
