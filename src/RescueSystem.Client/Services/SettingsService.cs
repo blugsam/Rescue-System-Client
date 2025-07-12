@@ -34,7 +34,7 @@ public class SettingsService
                     if (!Uri.TryCreate(settings.ServerUrl, UriKind.Absolute, out _))
                     {
                         Console.WriteLine($"Invalid ServerUrl: {settings.ServerUrl}, using default");
-                        settings.ServerUrl = "https://localhost:7043";
+                        settings.ServerUrl = "http://127.0.0.1:8080";
                     }
                     return settings;
                 }
