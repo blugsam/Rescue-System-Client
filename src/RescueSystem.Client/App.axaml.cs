@@ -49,6 +49,7 @@ namespace RescueSystem.Client
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<SettingsService>();
             services.AddHttpClient<ApiClient>((serviceProvider, client) =>
             {
                 var settingsService = serviceProvider.GetRequiredService<SettingsService>();
@@ -59,9 +60,7 @@ namespace RescueSystem.Client
                 var settingsService = serviceProvider.GetRequiredService<SettingsService>();
                 return new SignalRService(settingsService);
             });
-            services.AddSingleton<SettingsService>();
             services.AddSingleton<IInteractionService, DialogInteractionService>();
-
             services.AddTransient<AlertsViewModel>();
             services.AddTransient<UsersViewModel>();
             services.AddTransient<BraceletsViewModel>();

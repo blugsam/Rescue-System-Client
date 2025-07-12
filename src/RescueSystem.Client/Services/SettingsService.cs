@@ -27,7 +27,17 @@ public class SettingsService
             if (File.Exists(_settingsFilePath))
             {
                 var json = File.ReadAllText(_settingsFilePath);
-                return JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
+                var settings = JsonSerializer.Deserialize<AppSettings>(json);
+
+                if (settings != null)
+                {
+                    if (!Uri.TryCreate(settings.ServerUrl, UriKind.Absolute, out _))
+                    {
+                        Console.WriteLine($"Invalid ServerUrl: {settings.ServerUrl}, using default");
+                        settings.ServerUrl = "https://localhost:7043";
+                    }
+                    return settings;
+                }
             }
         }
         catch (Exception ex)
