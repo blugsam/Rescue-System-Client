@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using RescueSystem.Client.Services;
 using System;
 
 namespace RescueSystem.Client.ViewModels;

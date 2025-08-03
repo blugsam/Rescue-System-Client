@@ -1,5 +1,4 @@
-﻿using RescueSystem.Contracts.Contracts.Models;
-using RescueSystem.Contracts.Contracts.Requests;
+﻿using RescueSystem.Contracts.Contracts.Requests;
 using RescueSystem.Contracts.Contracts.Responses;
 using System;
 using System.Net.Http;
@@ -22,10 +21,10 @@ public class ApiClient
 
     #region Alerts API
 
-    public async Task<PagedResult<AlertSummaryDto>?> GetAllAlertsAsync(PaginationQueryParameters queryParams)
+    public async Task<PagedResultDto<AlertSummaryDto>?> GetAllAlertsAsync(PaginationQueryParameters queryParams)
     {
         var url = $"api/alerts?pageNumber={queryParams.PageNumber}&pageSize={queryParams.PageSize}";
-        return await GetAsync<PagedResult<AlertSummaryDto>>(url);
+        return await GetAsync<PagedResultDto<AlertSummaryDto>>(url);
     }
 
     public async Task<AlertDetailsDto?> GetAlertByIdAsync(Guid id)
@@ -33,9 +32,9 @@ public class ApiClient
         return await GetAsync<AlertDetailsDto>($"api/alerts/{id}");
     }
 
-    public async Task<AlertDetailsDto?> CreateAlertAsync(CreateAlertRequest request)
+    public async Task<AlertDetailsDto?> CreateAlertAsync(CreateAlertRequestDto request)
     {
-        return await PostAsync<CreateAlertRequest, AlertDetailsDto>("api/alerts", request);
+        return await PostAsync<CreateAlertRequestDto, AlertDetailsDto>("api/alerts", request);
     }
 
     public async Task DeleteAlertAsync(Guid id)
@@ -47,10 +46,10 @@ public class ApiClient
 
     #region Users API
 
-    public async Task<PagedResult<UserSummaryDto>?> GetAllUsersAsync(PaginationQueryParameters queryParams)
+    public async Task<PagedResultDto<UserSummaryDto>?> GetAllUsersAsync(PaginationQueryParameters queryParams)
     {
         var url = $"api/users?pageNumber={queryParams.PageNumber}&pageSize={queryParams.PageSize}&searchTerm={queryParams.SearchTerm}";
-        return await GetAsync<PagedResult<UserSummaryDto>>(url);
+        return await GetAsync<PagedResultDto<UserSummaryDto>>(url);
     }
 
     public async Task<UserDetailsDto?> GetUserByIdAsync(Guid id)
@@ -58,14 +57,14 @@ public class ApiClient
         return await GetAsync<UserDetailsDto>($"api/users/{id}");
     }
 
-    public async Task<UserDetailsDto?> CreateUserAsync(CreateUserRequest request)
+    public async Task<UserDetailsDto?> CreateUserAsync(CreateUserRequestDto request)
     {
-        return await PostAsync<CreateUserRequest, UserDetailsDto>("api/users", request);
+        return await PostAsync<CreateUserRequestDto, UserDetailsDto>("api/users", request);
     }
 
-    public async Task<UserDetailsDto?> UpdateUserAsync(Guid id, UpdateUserRequest request)
+    public async Task<UserDetailsDto?> UpdateUserAsync(Guid id, UpdateUserRequestDto request)
     {
-        return await PutAsync<UpdateUserRequest, UserDetailsDto>($"api/users/{id}", request);
+        return await PutAsync<UpdateUserRequestDto, UserDetailsDto>($"api/users/{id}", request);
     }
 
     public async Task DeleteUserAsync(Guid id)
@@ -77,10 +76,10 @@ public class ApiClient
 
     #region Bracelets API
 
-    public async Task<PagedResult<BraceletDto>?> GetAllBraceletsAsync(PaginationQueryParameters queryParams)
+    public async Task<PagedResultDto<BraceletDto>?> GetAllBraceletsAsync(PaginationQueryParameters queryParams)
     {
         var url = $"api/bracelets?pageNumber={queryParams.PageNumber}&pageSize={queryParams.PageSize}";
-        return await GetAsync<PagedResult<BraceletDto>>(url);
+        return await GetAsync<PagedResultDto<BraceletDto>>(url);
     }
 
     public async Task<BraceletDetailsDto?> GetBraceletByIdAsync(Guid id)
@@ -88,12 +87,12 @@ public class ApiClient
         return await GetAsync<BraceletDetailsDto>($"api/bracelets/{id}");
     }
 
-    public async Task<BraceletDetailsDto?> CreateBraceletAsync(CreateBraceletRequest request)
+    public async Task<BraceletDetailsDto?> CreateBraceletAsync(CreateBraceletRequestDto request)
     {
-        return await PostAsync<CreateBraceletRequest, BraceletDetailsDto>("api/bracelets", request);
+        return await PostAsync<CreateBraceletRequestDto, BraceletDetailsDto>("api/bracelets", request);
     }
 
-    public async Task UpdateBraceletStatusAsync(Guid id, UpdateBraceletRequest request)
+    public async Task UpdateBraceletStatusAsync(Guid id, UpdateBraceletRequestDto request)
     {
         await PutAsync($"api/bracelets/{id}/status", request);
     }

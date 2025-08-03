@@ -1,4 +1,4 @@
-﻿namespace RescueSystem.Client.Models;
+﻿namespace RescueSystem.Client.Services;
 
 public class AppSettings
 {

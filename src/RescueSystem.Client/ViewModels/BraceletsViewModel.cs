@@ -125,7 +125,7 @@ public partial class BraceletsViewModel : ViewModelBase
 
         try
         {
-            var request = new CreateBraceletRequest { SerialNumber = serialNumber };
+            var request = new CreateBraceletRequestDto { SerialNumber = serialNumber };
             await _apiClient.CreateBraceletAsync(request);
             await LoadBraceletsAsync();
         }
@@ -168,7 +168,7 @@ public partial class BraceletsViewModel : ViewModelBase
 
         try
         {
-            var request = new UpdateBraceletRequest { Status = newStatusEnum.ToString() };
+            var request = new UpdateBraceletRequestDto { Status = newStatusEnum.ToString() };
             await _apiClient.UpdateBraceletStatusAsync(braceletIdToUpdate, request);
 
             await LoadBraceletsAsync();

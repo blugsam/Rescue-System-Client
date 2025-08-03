@@ -114,7 +114,7 @@ public partial class UsersViewModel : ViewModelBase
         {
             if (_isNewUserMode)
             {
-                var createRequest = new CreateUserRequest
+                var createRequest = new CreateUserRequestDto
                 {
                     FullName = SelectedUserDetails.FullName,
                     DateOfBirth = SelectedUserDetails.DateOfBirth,
@@ -125,7 +125,7 @@ public partial class UsersViewModel : ViewModelBase
             }
             else
             {
-                var updateRequest = new UpdateUserRequest
+                var updateRequest = new UpdateUserRequestDto
                 {
                     FullName = SelectedUserDetails.FullName,
                     DateOfBirth = SelectedUserDetails.DateOfBirth,
