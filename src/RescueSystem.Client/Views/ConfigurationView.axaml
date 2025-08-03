@@ -9,16 +9,13 @@
 		<Border Padding="15" BorderThickness="1" BorderBrush="LightGray" CornerRadius="3">
 			<StackPanel Spacing="10">
 				<TextBlock Text="Адрес сервера API"/>
-				<TextBox Text="{Binding ServerUrl, Mode=TwoWay}" Watermark="https://localhost:7043"/>
-
-				<CheckBox IsChecked="{Binding SavePassword, Mode=TwoWay}"
-                          Content="Сохранять пароль (небезопасно)"/>
+				<TextBox Text="{Binding ServerUrl, Mode=TwoWay}" Watermark="http://127.0.0.1:8080"/>
 			</StackPanel>
 		</Border>
 
 		<StackPanel Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
 			<Button Content="Сохранить" Command="{Binding SaveSettingsCommand}"/>
-			<TextBlock Text="{Binding StatusMessage}" Foreground="Green" VerticalAlignment="Center"/>
+			<TextBlock Text="{Binding StatusMessage}" Foreground="White" VerticalAlignment="Center"/>
 		</StackPanel>
 
 	</StackPanel>
