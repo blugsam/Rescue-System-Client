@@ -34,6 +34,6 @@ public partial class ConfigurationViewModel : ViewModelBase
 
         _settingsService.SaveSettings();
 
-        StatusMessage = "Настройки сохранены! Перезапустите приложение для применения.";
+        StatusMessage = "Настройки сохранены!";
     }
 }
