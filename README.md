@@ -26,19 +26,37 @@ The application is built using the **Model-View-ViewModel (MVVM)** architectural
 To get started with this project, follow these steps:
 
 1) Clone the repository using the following command:
-```bash
-git clone https://github.com/blugsam/Rescue-System-Client
-```
+    ```bash
+    git clone https://github.com/blugsam/Rescue-System-Client
+    ```
 
-2) Set Up the configuration string on configuration window. Basically it is:
-```bash
-http://localhost:5107/
-```
+2) Make sure you have built the NuGet package as described in the library's README. Create a nuget.config file in the root folder of your project with the following content:
 
-2) Build and run the application
-```bash
-dotnet run
-```
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <configuration>
+      <packageSources>
+        <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+        <add key="LocalPackages" value="./local-packages" />
+      </packageSources>
+    </configuration>
+    ```
+    Create a local-packages folder nearby and copy the compiled RescueSystem.ClassLibrary.[VERSION].nupkg file into it.
+    Run the command to add the package to the project:
+
+    ```bash
+    dotnet add package RescueSystem.ClassLibrary
+    ```
+
+3) Build and run the application
+    ```bash
+    dotnet run
+    ```
+
+4) Set Up the configuration string on configuration window. Basically it is:
+    ```bash
+    http://localhost:5107/
+    ```
 
 ## Overview
 ⚠️Monitor live alerts on the app's home page
